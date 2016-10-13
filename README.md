@@ -15,6 +15,8 @@ Role Variables
 
 By default, this role installs Microsoft Silverlight. Toggling the `silverlight_uninstall` variable from `false` to `true` will uninstall the framework if it exists.
 
+To reboot Windows after successful installation, toggle the `silverlight_reboot` variable to `true`.
+
 Dependencies
 ------------
 

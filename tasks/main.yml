@@ -14,8 +14,12 @@
     register: silverlight_exe
 
   - debug:
-      var: uninstall_exe
+      var: silverlight_exe
       verbosity: 1
+
+  - name: "Reboot Windows."
+    win_reboot:
+    when: silverlight_exe.restart_required and silverlight_reboot
 
   when: silverlight_uninstall is not defined or not silverlight_uninstall
 

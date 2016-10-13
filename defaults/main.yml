@@ -1,3 +1,4 @@
 ---
 
 silverlight_uninstall: false
+silverlight_reboot: false
