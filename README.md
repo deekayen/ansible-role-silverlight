@@ -27,7 +27,7 @@ Example Playbook
 
     - hosts: servers
       roles:
-         - { role: deekayen.silverlight, silverlight_uninstall: false }
+         - { role: deekayen.silverlight, silverlight_uninstall: false, silverlight_reboot: false }
 
 License
 -------
