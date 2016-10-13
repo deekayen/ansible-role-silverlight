@@ -1,0 +1,31 @@
+---
+
+- block:
+
+  - debug:
+      var: ansible_architecture
+      verbosity: 2
+
+  - name: "Install Silverlight."
+    win_package:
+      path: "{{ silverlight_url64 if ansible_architecture == 'x86_64' else silverlight_url32 }}"
+      product_id: "{89F4137D-6C26-4A84-BDB8-2E5A4BB71E00}"
+    register: silverlight_exe
+
+  - debug:
+      var: uninstall_exe
+      verbosity: 1
+
+  when: silverlight_uninstall is not defined or not silverlight_uninstall
+
+- block:
+
+  - name: Uninstall Silverlight.
+    raw: Start-Process "C:\Windows\System32\msiexec.exe" -ArgumentList "/x {89F4137D-6C26-4A84-BDB8-2E5A4BB71E00} /qn" -Wait
+    register: silverlight_removed
+
+  - debug:
+      var: silverlight_removed
+      verbosity: 1
+
+  when: silverlight_uninstall is defined and silverlight_uninstall
