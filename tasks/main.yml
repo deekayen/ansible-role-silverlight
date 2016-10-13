@@ -10,6 +10,7 @@
     win_package:
       path: "{{ silverlight_url64 if ansible_architecture == 'x86_64' else silverlight_url32 }}"
       product_id: "{89F4137D-6C26-4A84-BDB8-2E5A4BB71E00}"
+      arguments: "/q"
     register: silverlight_exe
 
   - debug:
