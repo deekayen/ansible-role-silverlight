@@ -3,7 +3,7 @@ Silverlight
 
 Install (or uninstall) Microsoft Silverlight on Windows.
 
-Because the uninstall task uses Ansible's `raw` module, the play output will always report `ok` status instead of `changed`. The task does not wait for the msiexec process to exit before returning the `ok` status.
+Because the uninstall task uses Ansible's `raw` module, the play output will always report `ok` status instead of `changed`. The task does not wait for the msiexec process to exit before returning the `ok` status and does not know if uninstallation fails.
 
 Requirements
 ------------
