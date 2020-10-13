@@ -27,7 +27,11 @@ None.
 Example Playbook
 ----------------
 
-    - hosts: servers
+    ---
+
+    - name: Install Microsoft Silverlight.
+      hosts: servers
+
       roles:
          - role: deekayen.silverlight
            silverlight_uninstall: false
