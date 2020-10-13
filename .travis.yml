@@ -3,11 +3,6 @@
 dist: focal
 language: python
 
-addons:
-  apt:
-    packages:
-    - ansible-lint
-
 before_script:
   - ansible-lint --version
 
