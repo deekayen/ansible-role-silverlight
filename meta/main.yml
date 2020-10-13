@@ -1,13 +1,20 @@
 galaxy_info:
+  role_name: silverlight
   author: David Norman
   description: Install (or uninstall) Microsoft Silverlight.
+
+  github_branch: main
+  issue_tracker_url: https://github.com/deekayen/ansible-role-silverlight/issues
+
   license: BSD
   min_ansible_version: 2.1
+  
   platforms:
-  - name: Windows
-    versions:
-    - 2012R2
-  galaxy_tags:
+    - name: Windows
+      versions:
+        - 2012R2
+
+galaxy_tags:
     - windows
 
 dependencies: []
