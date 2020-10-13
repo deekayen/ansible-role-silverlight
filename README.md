@@ -12,6 +12,8 @@ Requirements
 
 The target Windows machines must have whitelisted Internet access to download the Silverlight installer from [download.microsoft.com]().
 
+The control machine should have `pywinrm` and one of `requests-ntlm`, `requests-kerberos`, and/or `requests-credssp` installed by `pip`.
+
 Role Variables
 --------------
 
