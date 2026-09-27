@@ -2,9 +2,14 @@ Silverlight
 ===========
 [![Project Status: Unsupported – The project has reached a stable, usable state but the author(s) have ceased all work on it. A new maintainer may be desired.](https://www.repostatus.org/badges/latest/unsupported.svg)](https://www.repostatus.org/#unsupported)
 
+> **Deprecated.** Microsoft ended Silverlight support in October 2021. The role
+> is kept for existing hosts. CI lints and syntax-checks it; it has no Windows
+> test host.
+
 Install (or uninstall) Microsoft Silverlight on Windows using Ansible.
 
-Because the uninstall task uses Ansible's `raw` module, the play output will always report `ok` status instead of `changed`. The task does not wait for the msiexec process to exit before returning the `ok` status and does not know if uninstallation fails.
+Because the uninstall task uses Ansible's `raw` module, it always reports
+`changed` and does not know whether uninstallation succeeded.
 
 Requirements
 ------------
@@ -35,8 +40,9 @@ Example Playbook
 
       roles:
          - role: deekayen.silverlight
-           silverlight_uninstall: false
-           silverlight_reboot: false
+           vars:
+             silverlight_uninstall: false
+             silverlight_reboot: false
 
 License
 -------

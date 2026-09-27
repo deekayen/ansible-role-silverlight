@@ -1,36 +1,41 @@
 ---
+- name: Install Silverlight.
+  when: not silverlight_uninstall | bool
+  block:
+    - name: "Debug: architecture."
+      ansible.builtin.debug:
+        var: ansible_facts.architecture
+        verbosity: 2
 
-- block:
+    - name: Install Silverlight.
+      ansible.windows.win_package:
+        path: "{{ silverlight_url64 if ansible_facts.architecture == '64-bit' else silverlight_url32 }}"
+        product_id: "{89F4137D-6C26-4A84-BDB8-2E5A4BB71E00}"
+        arguments: "/q"
+      register: silverlight_exe
 
-  - debug:
-      var: ansible_architecture
-      verbosity: 2
+    - name: "Debug: install output."
+      ansible.builtin.debug:
+        var: silverlight_exe
+        verbosity: 1
 
-  - name: "Install Silverlight."
-    win_package:
-      path: "{{ silverlight_url64 if ansible_architecture == '64-bit' else silverlight_url32 }}"
-      product_id: "{89F4137D-6C26-4A84-BDB8-2E5A4BB71E00}"
-      arguments: "/q"
-    register: silverlight_exe
+    - name: Reboot Windows.
+      ansible.windows.win_reboot:
+      when:
+        - silverlight_exe.restart_required | default(false)
+        - silverlight_reboot | bool
 
-  - debug:
-      var: silverlight_exe
-      verbosity: 1
+- name: Uninstall Silverlight.
+  when: silverlight_uninstall | bool
+  block:
+    - name: Uninstall Silverlight.
+      ansible.builtin.raw: >-
+        Start-Process "C:\Windows\System32\msiexec.exe"
+        -ArgumentList "/x {89F4137D-6C26-4A84-BDB8-2E5A4BB71E00} /qn" -Wait
+      register: silverlight_removed
+      changed_when: true
 
-  - name: "Reboot Windows."
-    win_reboot:
-    when: silverlight_exe.restart_required is defined and silverlight_exe.restart_required and silverlight_reboot
-
-  when: silverlight_uninstall is not defined or not silverlight_uninstall
-
-- block:
-
-  - name: Uninstall Silverlight.
-    raw: Start-Process "C:\Windows\System32\msiexec.exe" -ArgumentList "/x {89F4137D-6C26-4A84-BDB8-2E5A4BB71E00} /qn" -Wait
-    register: silverlight_removed
-
-  - debug:
-      var: silverlight_removed
-      verbosity: 1
-
-  when: silverlight_uninstall is defined and silverlight_uninstall
+    - name: "Debug: uninstall output."
+      ansible.builtin.debug:
+        var: silverlight_removed
+        verbosity: 1

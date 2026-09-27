@@ -1,0 +1,18 @@
+---
+argument_specs:
+  main:
+    short_description: Install (or uninstall) Microsoft Silverlight.
+    description:
+      - Installs Microsoft Silverlight from download.microsoft.com, or
+        removes it. Silverlight reached end of support in October 2021.
+    author:
+      - David Norman
+    options:
+      silverlight_uninstall:
+        type: bool
+        default: false
+        description: Uninstall Silverlight instead of installing it.
+      silverlight_reboot:
+        type: bool
+        default: false
+        description: Reboot after installing when the installer requests it.

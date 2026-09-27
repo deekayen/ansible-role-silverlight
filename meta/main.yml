@@ -1,4 +1,6 @@
+---
 galaxy_info:
+  namespace: deekayen
   role_name: silverlight
   author: David Norman
   description: Install (or uninstall) Microsoft Silverlight.
@@ -6,15 +8,17 @@ galaxy_info:
   github_branch: main
   issue_tracker_url: https://github.com/deekayen/ansible-role-silverlight/issues
 
-  license: BSD
-  min_ansible_version: 2.1
+  license: BSD-3-Clause
+  min_ansible_version: "2.15"
 
+  # Silverlight reached end of support in October 2021.
   platforms:
     - name: Windows
       versions:
         - 2012R2
 
-galaxy_tags:
+  galaxy_tags:
     - windows
+    - silverlight
 
 dependencies: []
